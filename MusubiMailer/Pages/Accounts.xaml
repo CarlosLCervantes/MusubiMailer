@@ -1,0 +1,25 @@
+﻿<Page x:Class="MusubiMailer.Pages.Accounts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="800"
+	Title="Accounts" Loaded="Page_Loaded">
+
+    <Grid Width="789">
+        <DataGrid Name="dgAccounts" ItemsSource="{Binding}" AutoGenerateColumns="True" Height="599" Margin="236,43,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="532">
+        </DataGrid>
+        <Label Content="New Account?" Height="28" HorizontalAlignment="Left" Margin="33,43,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Type" Height="28" HorizontalAlignment="Left" Margin="32,77,0,0" Name="label2" VerticalAlignment="Top" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="44,106,0,0" Name="cmbMailType" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Tag="0">Gmail</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Username" Height="28" HorizontalAlignment="Left" Margin="33,146,0,0" Name="label4" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="43,172,0,0" Name="txtUsername" VerticalAlignment="Top" Width="120" />
+        <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="33,201,0,0" Name="label5" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="43,224,0,0" Name="txtPassword" VerticalAlignment="Top" Width="120" />
+        <Button Content="Add New" Height="23" HorizontalAlignment="Left" Margin="62,267,0,0" Name="btnInsert" VerticalAlignment="Top" Width="75" Click="btnInsert_Click" />
+        <Label Content="Accounts Available" Height="28" HorizontalAlignment="Left" Margin="478,12,0,0" Name="label6" VerticalAlignment="Top" />
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<message_format>
+    <bcc>Jordan@LoyaltyDice.com,Carlos@LoyaltyDice.com</bcc>
+    <subject>New Fashion Site</subject>
+    <body>
+        Hi [FIRST_NAME],
+        We wanted to tell you about a new fashion site we just launched.
+        After spending countless hours browsing the web, magazines, and stores wishing we could own everything we loved, we did something about it.  
+        We started Gumball, www.getgumball.com , to work with top brands to giveaway the trendiest items and timeless classics.  
+        Our first giveaway is for a beautiful watch from Michael Kors anyone would love to have.  Check it out and let us know what you think.  
+        Oh yeah, and good luck :)
+
+        Thanks,
+        Gumball
+    </body>
+</message_format>

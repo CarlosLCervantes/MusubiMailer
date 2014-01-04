@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<message_format>
+    <subject>[SLIPSUM_HEADER]</subject>
+    <body>
+        [SLIPSUM]
+    </body>
+</message_format>

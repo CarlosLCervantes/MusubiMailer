@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MusubiMailerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MusubiMailerModelStoreContainer">
+          <EntitySet Name="Account" EntityType="MusubiMailerModel.Store.Account" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountActivity" EntityType="MusubiMailerModel.Store.AccountActivity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountCampaign" EntityType="MusubiMailerModel.Store.AccountCampaign" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Campaign" EntityType="MusubiMailerModel.Store.Campaign" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Email" EntityType="MusubiMailerModel.Store.Email" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmailCampaign" EntityType="MusubiMailerModel.Store.EmailCampaign" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmailGroup" EntityType="MusubiMailerModel.Store.EmailGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Group" EntityType="MusubiMailerModel.Store.Group" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AccountActivity_Account" Association="MusubiMailerModel.Store.FK_AccountActivity_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountActivity" EntitySet="AccountActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountCampaign_Account" Association="MusubiMailerModel.Store.FK_AccountCampaign_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountCampaign" EntitySet="AccountCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountCampaign_Campaign" Association="MusubiMailerModel.Store.FK_AccountCampaign_Campaign">
+            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="AccountCampaign" EntitySet="AccountCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailCampaign_Campaign" Association="MusubiMailerModel.Store.FK_EmailCampaign_Campaign">
+            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="EmailCampaign" EntitySet="EmailCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailCampaign_Email1" Association="MusubiMailerModel.Store.FK_EmailCampaign_Email1">
+            <End Role="Email" EntitySet="Email" />
+            <End Role="EmailCampaign" EntitySet="EmailCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailGroup_Email1" Association="MusubiMailerModel.Store.FK_EmailGroup_Email1">
+            <End Role="Email" EntitySet="Email" />
+            <End Role="EmailGroup" EntitySet="EmailGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailGroup_Group" Association="MusubiMailerModel.Store.FK_EmailGroup_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="EmailGroup" EntitySet="EmailGroup" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="EditDate" Type="date" />
+        </EntityType>
+        <EntityType Name="AccountActivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="EmailSendCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountCampaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="CampaignID" Type="int" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Campaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="Extra" Type="xml" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="EmailCampaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignID" Type="int" Nullable="false" />
+          <Property Name="EmailID" Type="int" Nullable="false" />
+          <Property Name="LastSendDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="RetriesCount" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmailID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountActivity_Account">
+          <End Role="Account" Type="MusubiMailerModel.Store.Account" Multiplicity="1" />
+          <End Role="AccountActivity" Type="MusubiMailerModel.Store.AccountActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountActivity">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountCampaign_Account">
+          <End Role="Account" Type="MusubiMailerModel.Store.Account" Multiplicity="1" />
+          <End Role="AccountCampaign" Type="MusubiMailerModel.Store.AccountCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountCampaign">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountCampaign_Campaign">
+          <End Role="Campaign" Type="MusubiMailerModel.Store.Campaign" Multiplicity="1" />
+          <End Role="AccountCampaign" Type="MusubiMailerModel.Store.AccountCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaign">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailCampaign_Campaign">
+          <End Role="Campaign" Type="MusubiMailerModel.Store.Campaign" Multiplicity="1" />
+          <End Role="EmailCampaign" Type="MusubiMailerModel.Store.EmailCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaign">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailCampaign_Email1">
+          <End Role="Email" Type="MusubiMailerModel.Store.Email" Multiplicity="1" />
+          <End Role="EmailCampaign" Type="MusubiMailerModel.Store.EmailCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailCampaign">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailGroup_Email1">
+          <End Role="Email" Type="MusubiMailerModel.Store.Email" Multiplicity="1" />
+          <End Role="EmailGroup" Type="MusubiMailerModel.Store.EmailGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailGroup">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailGroup_Group">
+          <End Role="Group" Type="MusubiMailerModel.Store.Group" Multiplicity="1" />
+          <End Role="EmailGroup" Type="MusubiMailerModel.Store.EmailGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailGroup">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusubiMailerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MusubiMailerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="MusubiMailerModel.Account" />
+          <EntitySet Name="AccountActivities" EntityType="MusubiMailerModel.AccountActivity" />
+          <EntitySet Name="Campaigns" EntityType="MusubiMailerModel.Campaign" />
+          <EntitySet Name="Emails" EntityType="MusubiMailerModel.Email" />
+          <EntitySet Name="EmailCampaigns" EntityType="MusubiMailerModel.EmailCampaign" />
+          <EntitySet Name="EmailGroups" EntityType="MusubiMailerModel.EmailGroup" />
+          <EntitySet Name="Groups" EntityType="MusubiMailerModel.Group" />
+          <AssociationSet Name="FK_AccountActivity_Account" Association="MusubiMailerModel.FK_AccountActivity_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountActivity" EntitySet="AccountActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailCampaign_Campaign" Association="MusubiMailerModel.FK_EmailCampaign_Campaign">
+            <End Role="Campaign" EntitySet="Campaigns" />
+            <End Role="EmailCampaign" EntitySet="EmailCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailGroup_Group" Association="MusubiMailerModel.FK_EmailGroup_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="EmailGroup" EntitySet="EmailGroups" />
+          </AssociationSet>
+          <EntitySet Name="AccountCampaigns" EntityType="MusubiMailerModel.AccountCampaign" />
+          <AssociationSet Name="FK_AccountCampaign_Account" Association="MusubiMailerModel.FK_AccountCampaign_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountCampaign" EntitySet="AccountCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountCampaign_Campaign" Association="MusubiMailerModel.FK_AccountCampaign_Campaign">
+            <End Role="Campaign" EntitySet="Campaigns" />
+            <End Role="AccountCampaign" EntitySet="AccountCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailCampaign_Email1" Association="MusubiMailerModel.FK_EmailCampaign_Email1">
+            <End Role="Email" EntitySet="Emails" />
+            <End Role="EmailCampaign" EntitySet="EmailCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailGroup_Email1" Association="MusubiMailerModel.FK_EmailGroup_Email1">
+            <End Role="Email" EntitySet="Emails" />
+            <End Role="EmailGroup" EntitySet="EmailGroups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AccountActivities" Relationship="MusubiMailerModel.FK_AccountActivity_Account" FromRole="Account" ToRole="AccountActivity" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="DateTime" Name="EditDate" />
+          <NavigationProperty Name="AccountCampaigns" Relationship="MusubiMailerModel.FK_AccountCampaign_Account" FromRole="Account" ToRole="AccountCampaign" />
+        </EntityType>
+        <EntityType Name="AccountActivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="EmailSendCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="MusubiMailerModel.FK_AccountActivity_Account" FromRole="AccountActivity" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Campaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmailCampaigns" Relationship="MusubiMailerModel.FK_EmailCampaign_Campaign" FromRole="Campaign" ToRole="EmailCampaign" />
+          <NavigationProperty Name="AccountCampaigns" Relationship="MusubiMailerModel.FK_AccountCampaign_Campaign" FromRole="Campaign" ToRole="AccountCampaign" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Extra" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Boolean" Name="Active" />
+          <NavigationProperty Name="EmailCampaigns" Relationship="MusubiMailerModel.FK_EmailCampaign_Email1" FromRole="Email" ToRole="EmailCampaign" />
+          <NavigationProperty Name="EmailGroups" Relationship="MusubiMailerModel.FK_EmailGroup_Email1" FromRole="Email" ToRole="EmailGroup" />
+        </EntityType>
+        <EntityType Name="EmailCampaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignID" Type="Int32" Nullable="false" />
+          <Property Name="EmailID" Type="Int32" Nullable="false" />
+          <Property Name="LastSendDate" Type="DateTime" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="RetriesCount" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Campaign" Relationship="MusubiMailerModel.FK_EmailCampaign_Campaign" FromRole="EmailCampaign" ToRole="Campaign" />
+          <NavigationProperty Name="Email" Relationship="MusubiMailerModel.FK_EmailCampaign_Email1" FromRole="EmailCampaign" ToRole="Email" />
+        </EntityType>
+        <EntityType Name="EmailGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="MusubiMailerModel.FK_EmailGroup_Group" FromRole="EmailGroup" ToRole="Group" />
+          <NavigationProperty Name="Email" Relationship="MusubiMailerModel.FK_EmailGroup_Email1" FromRole="EmailGroup" ToRole="Email" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="EditDate" Type="DateTime" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmailGroups" Relationship="MusubiMailerModel.FK_EmailGroup_Group" FromRole="Group" ToRole="EmailGroup" />
+        </EntityType>
+        <Association Name="FK_AccountActivity_Account">
+          <End Role="Account" Type="MusubiMailerModel.Account" Multiplicity="1" />
+          <End Role="AccountActivity" Type="MusubiMailerModel.AccountActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountActivity">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailCampaign_Campaign">
+          <End Role="Campaign" Type="MusubiMailerModel.Campaign" Multiplicity="1" />
+          <End Role="EmailCampaign" Type="MusubiMailerModel.EmailCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaign">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailGroup_Group">
+          <End Role="Group" Type="MusubiMailerModel.Group" Multiplicity="1" />
+          <End Role="EmailGroup" Type="MusubiMailerModel.EmailGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailGroup">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountCampaign">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="AccountID" Nullable="false" />
+          <Property Type="Int32" Name="CampaignID" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" />
+          <Property Type="Int32" Name="Priority" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="MusubiMailerModel.FK_AccountCampaign_Account" FromRole="AccountCampaign" ToRole="Account" />
+          <NavigationProperty Name="Campaign" Relationship="MusubiMailerModel.FK_AccountCampaign_Campaign" FromRole="AccountCampaign" ToRole="Campaign" />
+        </EntityType>
+        <Association Name="FK_AccountCampaign_Account">
+          <End Type="MusubiMailerModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="MusubiMailerModel.AccountCampaign" Role="AccountCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountCampaign">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountCampaign_Campaign">
+          <End Type="MusubiMailerModel.Campaign" Role="Campaign" Multiplicity="1" />
+          <End Type="MusubiMailerModel.AccountCampaign" Role="AccountCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaign">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailCampaign_Email1">
+          <End Type="MusubiMailerModel.Email" Role="Email" Multiplicity="1" />
+          <End Type="MusubiMailerModel.EmailCampaign" Role="EmailCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailCampaign">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailGroup_Email1">
+          <End Type="MusubiMailerModel.Email" Role="Email" Multiplicity="1" />
+          <End Type="MusubiMailerModel.EmailGroup" Role="EmailGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailGroup">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusubiMailerModelStoreContainer" CdmEntityContainer="MusubiMailerEntities">
+          <EntitySetMapping Name="Accounts"><EntityTypeMapping TypeName="MusubiMailerModel.Account"><MappingFragment StoreEntitySet="Account">
+            <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="AccountActivities"><EntityTypeMapping TypeName="MusubiMailerModel.AccountActivity"><MappingFragment StoreEntitySet="AccountActivity">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="EmailSendCount" ColumnName="EmailSendCount" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Campaigns"><EntityTypeMapping TypeName="MusubiMailerModel.Campaign"><MappingFragment StoreEntitySet="Campaign">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Emails"><EntityTypeMapping TypeName="MusubiMailerModel.Email"><MappingFragment StoreEntitySet="Email">
+            <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Notes" ColumnName="Notes" />
+            <ScalarProperty Name="Extra" ColumnName="Extra" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="EmailCampaigns"><EntityTypeMapping TypeName="MusubiMailerModel.EmailCampaign"><MappingFragment StoreEntitySet="EmailCampaign">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+            <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+            <ScalarProperty Name="LastSendDate" ColumnName="LastSendDate" />
+            <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+            <ScalarProperty Name="RetriesCount" ColumnName="RetriesCount" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="EmailGroups"><EntityTypeMapping TypeName="MusubiMailerModel.EmailGroup"><MappingFragment StoreEntitySet="EmailGroup">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+            <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Groups"><EntityTypeMapping TypeName="MusubiMailerModel.Group"><MappingFragment StoreEntitySet="Group">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="AccountCampaigns">
+            <EntityTypeMapping TypeName="MusubiMailerModel.AccountCampaign">
+              <MappingFragment StoreEntitySet="AccountCampaign">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MusubiDB">
+        <EntityTypeShape EntityType="MusubiMailerModel.Account" Width="1.5" PointX="0.75" PointY="0.625" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.AccountActivity" Width="1.5" PointX="0.5" PointY="4.25" Height="1.9802864583333344" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.Campaign" Width="1.5" PointX="9.375" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.Email" Width="1.5" PointX="4.625" PointY="0.625" Height="2.9417936197916661" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.EmailCampaign" Width="1.5" PointX="7" PointY="0.625" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.EmailGroup" Width="1.5" PointX="4.75" PointY="4.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusubiMailerModel.Group" Width="1.5" PointX="6.875" PointY="4.625" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="MusubiMailerModel.FK_AccountActivity_Account" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.375" PointY="3.3744921875" />
+          <ConnectorPoint PointX="1.375" PointY="4.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="MusubiMailerModel.FK_EmailCampaign_Campaign" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.375" PointY="2.3941717701822909" />
+          <ConnectorPoint PointX="8.5" PointY="2.3941717701822909" />
+        </AssociationConnector>
+        <AssociationConnector Association="MusubiMailerModel.FK_EmailGroup_Group" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.875" PointY="5.8362939453125" />
+          <ConnectorPoint PointX="6.25" PointY="5.8362939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MusubiMailerModel.AccountCampaign" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166674" />
+        <AssociationConnector Association="MusubiMailerModel.FK_AccountCampaign_Account" >
+          <ConnectorPoint PointX="2.25" PointY="1.9324446614583337" />
+          <ConnectorPoint PointX="2.75" PointY="1.9324446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MusubiMailerModel.FK_AccountCampaign_Campaign" ManuallyRouted="true" >
+          <ConnectorPoint PointX="9.375" PointY="1.2618949726562492" />
+          <ConnectorPoint PointX="8.75" PointY="1.2618949726562492" />
+          <ConnectorPoint PointX="8.75" PointY="0.27113932291666742" />
+          <ConnectorPoint PointX="3.5" PointY="0.27113932291666742" />
+          <ConnectorPoint PointX="3.5" PointY="0.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="MusubiMailerModel.FK_EmailCampaign_Email1" >
+          <ConnectorPoint PointX="6.125" PointY="1.2979484049479166" />
+          <ConnectorPoint PointX="7" PointY="1.2979484049479166" />
+        </AssociationConnector>
+        <AssociationConnector Association="MusubiMailerModel.FK_EmailGroup_Email1" >
+          <ConnectorPoint PointX="5.84375" PointY="4.1436979166666656" />
+          <ConnectorPoint PointX="5.84375" PointY="4.875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

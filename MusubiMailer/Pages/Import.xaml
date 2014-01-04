@@ -1,0 +1,35 @@
+﻿<Page x:Class="MusubiMailer.Pages.Import"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="800"
+	Title="Import" Loaded="Page_Loaded">
+
+    <Grid Loaded="Grid_Loaded">
+        <Button Content="Choose a File" Height="23" HorizontalAlignment="Left" Margin="71,34,0,0" Name="btnChoseFile" VerticalAlignment="Top" Width="75" Click="btnChoseFile_Click" />
+        <TextBox Height="28" HorizontalAlignment="Left" Margin="170,29,0,0" Name="txtCSVFile" VerticalAlignment="Top" Width="325" />
+        <Button Content="IMPORT" Height="23" HorizontalAlignment="Left" Margin="633,34,0,0" Name="btnImportNow" VerticalAlignment="Top" Width="75" Click="btnImportNow_Click" />
+        <TextBlock Height="57" HorizontalAlignment="Left" Margin="20,547,0,0" Name="tbConsole" Text="TextBlock" VerticalAlignment="Top" Width="688" />
+        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="True" Height="393" Margin="71,148,0,0" Name="dgEmails" VerticalAlignment="Top" HorizontalAlignment="Left" Width="646">
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                <DataGridHyperlinkColumn Header="Email" Binding="{Binding Email}"  ContentBinding="{Binding Email, Converter={StaticResource EmailConverter}}" />
+                <DataGridCheckBoxColumn Header="Member?" Binding="{Binding IsMember}" />
+                <DataGridComboBoxColumn Header="Order Status"  SelectedItemBinding="{Binding Status}" ItemsSource="{Binding Source={StaticResource myEnum}}" />
+            </DataGrid.Columns>-->
+        </DataGrid>
+        <Label Content="FirstName" Height="28" HorizontalAlignment="Left" Margin="71,101,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Import Indexes" Height="28" HorizontalAlignment="Left" Margin="71,76,0,0" Name="label2" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label Content="Last Name" Height="28" HorizontalAlignment="Left" Margin="197,105,0,0" Name="label3" VerticalAlignment="Top" />
+        <Label Content="Email" Height="28" HorizontalAlignment="Left" Margin="362,103,0,0" Name="label4" VerticalAlignment="Top" />
+        <TextBox Name="txtFirstNameIndex" Height="23" HorizontalAlignment="Left" Margin="141,103,0,0"  VerticalAlignment="Top" Width="35" />
+        <TextBox Name="txtLastNameIndex" Height="23" HorizontalAlignment="Left" Margin="269,104,0,0"  VerticalAlignment="Top" Width="35" />
+        <TextBox Name="txtEmailNameIndex" Height="23" HorizontalAlignment="Left" Margin="406,104,0,0"  VerticalAlignment="Top" Width="35" />
+        <Button Content="Load" Height="23" HorizontalAlignment="Right" Margin="0,34,199,0" Name="btnLoad" VerticalAlignment="Top" Width="75" Click="btnLoad_Click" />
+        <Label Content="Import Name" Height="28" HorizontalAlignment="Left" Margin="506,76,0,0" Name="label5" VerticalAlignment="Top" FontWeight="Bold" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="540,101,0,0" Name="txtGroupName" VerticalAlignment="Top" Width="120" />
+    </Grid>
+</Page>
